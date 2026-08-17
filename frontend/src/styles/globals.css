@@ -613,6 +613,51 @@ header p {
   border-radius: 12px;
 }
 
+/* Leader Modal Sections & Download Button */
+.leader-section {
+  margin-bottom: 24px;
+}
+
+.leader-section-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: #17233b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-count {
+  font-size: 11px;
+  font-weight: 800;
+  background: #eef3ff;
+  color: #315ec6;
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+
+.download-report-btn {
+  display: block;
+  width: 100%;
+  border: 1.5px solid #315ec6;
+  border-radius: 9px;
+  background: #fff;
+  color: #315ec6;
+  padding: 13px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s, color 0.15s;
+  margin-top: 20px;
+}
+
+.download-report-btn:hover {
+  background: #315ec6;
+  color: #fff;
+}
+
 /* ==========================================================================
    Responsive Rules
    ========================================================================== */
