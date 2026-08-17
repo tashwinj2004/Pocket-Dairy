@@ -13,6 +13,7 @@ export default function EmployeeModal({ day, entries, onClose, onCreate, onEdit,
   const [form, setForm] = useState(EMPTY_FORM);
   const [editingId, setEditingId] = useState(null); // id of entry being edited
   const [saving, setSaving] = useState(false);
+  const [expandedId, setExpandedId] = useState(null);
 
   const taskReady = form.task_name.trim().length >= 5;
 
@@ -70,33 +71,61 @@ export default function EmployeeModal({ day, entries, onClose, onCreate, onEdit,
 
         {/* Existing entries */}
         <div className="entry-list">
-          {entries.map((entry) => (
-            <article key={entry.id} className={editingId === entry.id ? "editing" : ""}>
-              <div className="entry-body">
-                <b className={entry.entry_type}>
-                  {entry.entry_type === "plan" ? "Daily plan" : "Work done"}
-                </b>
-                <strong>{entry.task_name}</strong>
-                <span>
-                  {entry.client_name}
-                  {entry.location && ` · ${entry.location}`}
-                </span>
-                {entry.description && <p>{entry.description}</p>}
-              </div>
-              <div className="entry-actions">
-                <button
-                  className="edit-btn"
-                  title="Edit entry"
-                  onClick={() => startEdit(entry)}
-                >
-                  Edit
-                </button>
-                <button className="delete" onClick={() => onDelete(entry.id)}>
-                  Delete
-                </button>
-              </div>
-            </article>
-          ))}
+          {entries.map((entry) => {
+            const isExpanded = expandedId === entry.id || editingId === entry.id;
+            return (
+              <article
+                key={entry.id}
+                className={`${editingId === entry.id ? "editing" : ""} ${isExpanded ? "expanded" : "collapsed"}`}
+                onClick={() => setExpandedId(expandedId === entry.id ? null : entry.id)}
+                style={{ cursor: "pointer" }}
+              >
+                <div className="entry-body">
+                  <b className={entry.entry_type}>
+                    {entry.entry_type === "plan" ? "Daily plan" : "Work done"}
+                  </b>
+                  <strong>{entry.task_name}</strong>
+                  <span>
+                    {entry.client_name}
+                    {entry.location && ` · ${entry.location}`}
+                  </span>
+                  {entry.description && (
+                    <p className={`entry-description-text ${isExpanded ? "expanded" : "collapsed-lines"}`}>
+                      {entry.description}
+                    </p>
+                  )}
+                  {isExpanded && entry.created_at && (
+                    <span className="entry-time">
+                      Submitted: {format(new Date(entry.created_at), "dd MMM yyyy, hh:mm a")}
+                    </span>
+                  )}
+                </div>
+                {isExpanded && (
+                  <div className="entry-actions" onClick={(e) => e.stopPropagation()}>
+                    <button
+                      className="edit-btn"
+                      title="Edit entry"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        startEdit(entry);
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="delete"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onDelete(entry.id);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )}
+              </article>
+            );
+          })}
         </div>
 
         {/* Add / Edit form */}

@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { useState } from "react";
 
 /**
  * Opens a hidden print window with plans on page 1 and work-done on page 2.
@@ -23,6 +24,7 @@ function downloadDayReport(employee, day, entries) {
           <div class="entry-title">${e.task_name}</div>
           ${e.client_name ? `<div class="entry-meta">Client: ${e.client_name}</div>` : ""}
           ${e.location ? `<div class="entry-meta">Location: ${e.location}</div>` : ""}
+          ${e.created_at ? `<div class="entry-meta">Submitted: ${format(new Date(e.created_at), "dd MMM yyyy, hh:mm a")}</div>` : ""}
           ${e.description ? `<div class="entry-desc">${e.description}</div>` : ""}
         </div>`
       )
@@ -101,6 +103,7 @@ function downloadDayReport(employee, day, entries) {
       padding: 8px 12px;
       background: #edf0f8;
       border-radius: 5px;
+      white-space: pre-wrap;
     }
     .footer {
       margin-top: 40px;
@@ -150,6 +153,7 @@ function downloadDayReport(employee, day, entries) {
 }
 
 export default function LeaderModal({ day, employee, entries, onClose }) {
+  const [expandedId, setExpandedId] = useState(null);
   const plans = entries.filter((e) => e.entry_type === "plan");
   const works = entries.filter((e) => e.entry_type === "work_done");
 
@@ -174,19 +178,36 @@ export default function LeaderModal({ day, employee, entries, onClose }) {
                   📋 Daily Plan <span className="section-count">{plans.length}</span>
                 </h3>
                 <div className="entry-list">
-                  {plans.map((entry) => (
-                    <article key={entry.id}>
-                      <div>
-                        <b className={entry.entry_type}>Daily plan</b>
-                        <strong>{entry.task_name}</strong>
-                        <span>
-                          {entry.client_name}
-                          {entry.location && ` · ${entry.location}`}
-                        </span>
-                        <p>{entry.description || "No description"}</p>
-                      </div>
-                    </article>
-                  ))}
+                  {plans.map((entry) => {
+                    const isExpanded = expandedId === entry.id;
+                    return (
+                      <article
+                        key={entry.id}
+                        onClick={() => setExpandedId(expandedId === entry.id ? null : entry.id)}
+                        className={isExpanded ? "expanded" : "collapsed"}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <div>
+                          <b className={entry.entry_type}>Daily plan</b>
+                          <strong>{entry.task_name}</strong>
+                          <span>
+                            {entry.client_name}
+                            {entry.location && ` · ${entry.location}`}
+                          </span>
+                          {entry.description && (
+                            <p className={`entry-description-text ${isExpanded ? "expanded" : "collapsed-lines"}`}>
+                              {entry.description}
+                            </p>
+                          )}
+                          {isExpanded && entry.created_at && (
+                            <span className="entry-time">
+                              Submitted: {format(new Date(entry.created_at), "dd MMM yyyy, hh:mm a")}
+                            </span>
+                          )}
+                        </div>
+                      </article>
+                    );
+                  })}
                 </div>
               </section>
             )}
@@ -198,19 +219,36 @@ export default function LeaderModal({ day, employee, entries, onClose }) {
                   ✅ Work Done <span className="section-count">{works.length}</span>
                 </h3>
                 <div className="entry-list">
-                  {works.map((entry) => (
-                    <article key={entry.id}>
-                      <div>
-                        <b className={entry.entry_type}>Work done</b>
-                        <strong>{entry.task_name}</strong>
-                        <span>
-                          {entry.client_name}
-                          {entry.location && ` · ${entry.location}`}
-                        </span>
-                        <p>{entry.description || "No description"}</p>
-                      </div>
-                    </article>
-                  ))}
+                  {works.map((entry) => {
+                    const isExpanded = expandedId === entry.id;
+                    return (
+                      <article
+                        key={entry.id}
+                        onClick={() => setExpandedId(expandedId === entry.id ? null : entry.id)}
+                        className={isExpanded ? "expanded" : "collapsed"}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <div>
+                          <b className={entry.entry_type}>Work done</b>
+                          <strong>{entry.task_name}</strong>
+                          <span>
+                            {entry.client_name}
+                            {entry.location && ` · ${entry.location}`}
+                          </span>
+                          {entry.description && (
+                            <p className={`entry-description-text ${isExpanded ? "expanded" : "collapsed-lines"}`}>
+                              {entry.description}
+                            </p>
+                          )}
+                          {isExpanded && entry.created_at && (
+                            <span className="entry-time">
+                              Submitted: {format(new Date(entry.created_at), "dd MMM yyyy, hh:mm a")}
+                            </span>
+                          )}
+                        </div>
+                      </article>
+                    );
+                  })}
                 </div>
               </section>
             )}

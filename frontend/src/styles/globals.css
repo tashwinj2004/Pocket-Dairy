@@ -575,11 +575,35 @@ header p {
   background: #cdeedf;
 }
 
-.entry-list span,
-.entry-list p {
+.entry-list span {
   color: #66738c;
   font-size: 13px;
   margin: 0;
+}
+
+.entry-description-text {
+  color: #66738c;
+  font-size: 13px;
+  margin: 0;
+}
+
+.entry-description-text.collapsed-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.entry-description-text.expanded {
+  white-space: pre-wrap;
+}
+
+.entry-time {
+  font-size: 11px;
+  color: #8fa3c0;
+  margin-top: 6px;
+  display: block;
 }
 
 .delete {
@@ -1097,6 +1121,7 @@ header p {
   font-size: 13px;
   color: #354060;
   margin: 8px 0;
+  white-space: pre-wrap;
 }
 
 .bin-preview-actions {
