@@ -33,11 +33,15 @@ export default function LeaderDashboard() {
   }, [router]);
 
   // Reload entries when selected employee or month changes
-  useEffect(() => {
+  function loadEntries() {
     if (selected) {
       api(`/leader/employees/${selected.id}/entries?month=${format(month, "yyyy-MM")}`)
         .then(setEntries);
     }
+  }
+
+  useEffect(() => {
+    loadEntries();
   }, [selected, month]);
 
   // Entries that belong to the selected day
@@ -57,6 +61,7 @@ export default function LeaderDashboard() {
           clearSession();
           router.push("/");
         }}
+        onRefresh={loadEntries}
       />
 
       <div className="dashboard">

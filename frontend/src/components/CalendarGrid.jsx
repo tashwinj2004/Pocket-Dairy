@@ -59,20 +59,26 @@ export default function CalendarGrid({
               >
                 <time>{format(day, "d")}</time>
 
-                <div className="entry-dots">
-                  {entriesFor(day)
-                    .slice(0, 3)
-                    .map((entry) => (
-                      <i className={entry.entry_type} key={entry.id} />
-                    ))}
-                </div>
-
-                {entriesFor(day).length > 0 && (
-                  <small>
-                    {entriesFor(day).length} update
-                    {entriesFor(day).length > 1 ? "s" : ""}
-                  </small>
-                )}
+                {(() => {
+                  const dayEntries = entriesFor(day);
+                  const planCount = dayEntries.filter((e) => e.entry_type === "plan").length;
+                  const workCount = dayEntries.filter((e) => e.entry_type === "work_done").length;
+                  if (dayEntries.length === 0) return null;
+                  return (
+                    <div className="entry-counts">
+                      {planCount > 0 && (
+                        <span className="entry-count plan-count">
+                          {planCount}P
+                        </span>
+                      )}
+                      {workCount > 0 && (
+                        <span className="entry-count work-count">
+                          {workCount}W
+                        </span>
+                      )}
+                    </div>
+                  );
+                })()}
               </button>
             ) : (
               <div className="day blank" key={`blank-${index}`} />

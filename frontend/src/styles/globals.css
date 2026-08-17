@@ -188,10 +188,29 @@ textarea {
   gap: 5px;
 }
 
-.profile small,
-.sidebar-bottom span,
-.employee small {
-  color: #aebfe8;
+.profile-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-info {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.profile-info strong {
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.profile-email {
+  font-size: 11px;
+  color: #8ca7d8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .avatar {
@@ -220,6 +239,11 @@ textarea {
   display: grid;
 }
 
+.employee small,
+.profile-info small {
+  color: #aebfe8;
+}
+
 .employee.active,
 .employee:hover {
   background: #2c4d96;
@@ -228,13 +252,32 @@ textarea {
 .sidebar-bottom {
   margin-top: auto;
   display: grid;
-  gap: 16px;
+  gap: 12px;
 }
 
 .logout {
   color: #fff;
   text-align: left;
   font-weight: bold;
+}
+
+.sidebar-refresh {
+  border: 1.5px solid #3a5fa8;
+  background: #1e3d7a;
+  color: #aebfe8;
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.sidebar-refresh:hover {
+  background: #2c4d96;
+  border-color: #75d7b4;
+  color: #75d7b4;
 }
 
 /* ==========================================================================
@@ -345,13 +388,37 @@ header p {
   font-weight: 700;
 }
 
-.entry-dots {
+/* Separate plan / work-done count badges */
+.entry-counts {
   display: flex;
   gap: 4px;
-  margin-top: 15px;
+  margin-top: 10px;
+  flex-wrap: wrap;
 }
 
-.entry-dots i,
+.entry-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 5px;
+  line-height: 1;
+  letter-spacing: 0.3px;
+}
+
+.plan-count {
+  background: #ffe1bd;
+  color: #7a4500;
+}
+
+.work-count {
+  background: #cdeedf;
+  color: #1a5c3a;
+}
+
+/* Keep legend dots */
 .legend i {
   display: inline-block;
   width: 8px;
@@ -366,11 +433,6 @@ header p {
 
 .work_done {
   background: #62c8a3;
-}
-
-.day small {
-  font-size: 12px;
-  color: #61708b;
 }
 
 .legend {
@@ -510,8 +572,9 @@ header p {
   .brand-mark div,
   .profile strong,
   .profile small,
+  .profile-email,
   .team,
-  .sidebar-bottom span {
+  .sidebar-refresh span {
     display: none;
   }
 

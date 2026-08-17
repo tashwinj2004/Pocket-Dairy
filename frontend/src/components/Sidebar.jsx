@@ -5,6 +5,7 @@ export default function Sidebar({
   selectedEmployee,
   onEmployee,
   onLogout,
+  onRefresh,
 }) {
   return (
     <aside className="sidebar">
@@ -18,11 +19,16 @@ export default function Sidebar({
         </div>
       </div>
 
-      {/* Logged-in user profile */}
+      {/* Logged-in user profile — avatar + name/email inline */}
       <div className="profile">
-        <div className="avatar">{user?.full_name?.[0] || "U"}</div>
-        <strong>{user?.full_name}</strong>
-        <small>{user?.employee_id}</small>
+        <div className="profile-row">
+          <div className="avatar">{user?.full_name?.[0] || "U"}</div>
+          <div className="profile-info">
+            <strong>{user?.full_name}</strong>
+            <small>{user?.employee_id}</small>
+            <span className="profile-email">{user?.email}</span>
+          </div>
+        </div>
       </div>
 
       {/* Employee list (leader only) */}
@@ -44,12 +50,16 @@ export default function Sidebar({
         </div>
       )}
 
-      {/* Bottom: email + logout */}
+      {/* Bottom: logout above recycle-bin area */}
       <div className="sidebar-bottom">
-        <span>{user?.email}</span>
         <button className="logout" onClick={onLogout}>
           Log out
         </button>
+        {isLeader && onRefresh && (
+          <button className="sidebar-refresh" onClick={onRefresh} title="Refresh employee data">
+            ↻ Refresh
+          </button>
+        )}
       </div>
     </aside>
   );
