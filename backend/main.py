@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
 
@@ -14,6 +14,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.middleware("http")
+async def strip_api_backend_prefix(request: Request, call_next):
+    path = request.scope.get("path", "")
+    if path.startswith("/api/backend"):
+        request.scope["path"] = path[len("/api/backend"):]
+    return await call_next(request)
 
 
 @app.on_event("startup")
