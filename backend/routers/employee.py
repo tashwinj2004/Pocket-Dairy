@@ -87,8 +87,16 @@ def update_entry(
     if not entry:
         raise HTTPException(status_code=404, detail="Entry not found")
 
+    has_changes = False
     for field, value in payload.model_dump(exclude_none=True).items():
-        setattr(entry, field, value)
+        current_value = getattr(entry, field)
+        if current_value != value:
+            setattr(entry, field, value)
+            has_changes = True
+
+    if has_changes:
+        entry.created_at = datetime.now(timezone.utc)
+
     db.commit()
     db.refresh(entry)
     return entry
