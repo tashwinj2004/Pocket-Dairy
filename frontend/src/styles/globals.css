@@ -1,0 +1,931 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Base Styles & Reset
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f5f7fc;
+  color: #17233b;
+  font-family: Inter, Arial, sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid #d6deed;
+  border-radius: 9px;
+  padding: 13px;
+  background: #fff;
+}
+
+textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+/* ==========================================================================
+   Auth Pages (Login / Register)
+   ========================================================================== */
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: linear-gradient(120deg, #2545a1, #5c90df);
+}
+
+.auth-card {
+  width: min(920px, 100%);
+  background: #fff;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 70px #15255580;
+}
+
+.auth-brand {
+  padding: 68px 48px;
+  background: #183c91;
+  color: #fff;
+}
+
+.logo,
+.avatar {
+  display: grid;
+  place-items: center;
+  background: #75d7b4;
+  color: #183c91;
+  border-radius: 15px;
+  font-weight: 800;
+}
+
+.logo {
+  height: 60px;
+  width: 60px;
+  font-size: 35px;
+}
+
+.auth-brand p {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.auth-brand span {
+  color: #b9c9f3;
+}
+
+.auth-form {
+  padding: 52px;
+}
+
+.eyebrow {
+  color: #4776d3;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.auth-form h1 {
+  margin: 10px 0 28px;
+}
+
+.auth-form form,
+.modal form {
+  display: grid;
+  gap: 12px;
+}
+
+.primary {
+  border: 0;
+  border-radius: 9px;
+  background: #315ec6;
+  color: #fff;
+  padding: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.text-button,
+.logout,
+.employee,
+.calendar-top button,
+.close,
+.delete,
+.type-tabs button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.text-button {
+  color: #315ec6;
+  margin-top: 18px;
+}
+
+.error {
+  color: #cf364b;
+  font-size: 13px;
+}
+
+/* ==========================================================================
+   App Shell & Sidebar
+   ========================================================================== */
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 280px;
+  background: #172d63;
+  color: #eef3ff;
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.brand-mark {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.brand-mark span {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #75d7b4;
+  color: #172d63;
+  font-size: 25px;
+}
+
+.profile {
+  display: grid;
+  gap: 5px;
+}
+
+.profile small,
+.sidebar-bottom span,
+.employee small {
+  color: #aebfe8;
+}
+
+.avatar {
+  height: 48px;
+  width: 48px;
+  background: #6e9cf0;
+  color: #fff;
+}
+
+.team {
+  display: grid;
+  gap: 6px;
+}
+
+.team p {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #aebfe8;
+}
+
+.employee {
+  color: #fff;
+  text-align: left;
+  border-radius: 8px;
+  padding: 10px;
+  display: grid;
+}
+
+.employee.active,
+.employee:hover {
+  background: #2c4d96;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  display: grid;
+  gap: 16px;
+}
+
+.logout {
+  color: #fff;
+  text-align: left;
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   Dashboard
+   ========================================================================== */
+
+.dashboard {
+  flex: 1;
+  padding: 48px;
+  max-width: 1300px;
+  margin: auto;
+  width: 100%;
+}
+
+header h1 {
+  margin: 7px 0;
+  font-size: 32px;
+}
+
+header p {
+  color: #68758c;
+  font-size: 16px;
+}
+
+/* ==========================================================================
+   Calendar Panel
+   ========================================================================== */
+
+.calendar-panel {
+  margin-top: 34px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 10px 30px #1934660d;
+}
+
+.calendar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.calendar-top p {
+  margin: 0;
+  color: #75819a;
+}
+
+.calendar-top h1 {
+  margin: 4px;
+  font-size: 22px;
+}
+
+.calendar-top button {
+  font-size: 32px;
+  color: #315ec6;
+}
+
+.weekdays,
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.weekdays div {
+  padding: 13px 8px;
+  background: #315ec6;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+.weekdays div:first-child {
+  border-radius: 8px 0 0 0;
+}
+
+.weekdays div:last-child {
+  border-radius: 0 8px 0 0;
+}
+
+.day {
+  min-height: 112px;
+  border: 1px solid #edf0f6;
+  background: #fff;
+  text-align: left;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.day:hover {
+  background: #f4f7ff;
+}
+
+.day:nth-child(14n+1),
+.day:nth-child(14n+2),
+.day:nth-child(14n+3),
+.day:nth-child(14n+4),
+.day:nth-child(14n+5),
+.day:nth-child(14n+6),
+.day:nth-child(14n+7) {
+  background: #f8faff;
+}
+
+.day time {
+  font-weight: 700;
+}
+
+.entry-dots {
+  display: flex;
+  gap: 4px;
+  margin-top: 15px;
+}
+
+.entry-dots i,
+.legend i {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.plan {
+  background: #f8ad55;
+}
+
+.work_done {
+  background: #62c8a3;
+}
+
+.day small {
+  font-size: 12px;
+  color: #61708b;
+}
+
+.legend {
+  font-size: 12px;
+  color: #67748b;
+}
+
+/* ==========================================================================
+   Modals
+   ========================================================================== */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: #13255399;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 10;
+}
+
+.modal {
+  position: relative;
+  width: min(610px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  background: #fff;
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: 0 30px 80px #07133388;
+}
+
+.modal h2 {
+  margin: 7px 0 24px;
+}
+
+.close {
+  position: absolute;
+  right: 18px;
+  top: 12px;
+  font-size: 28px;
+}
+
+.entry-list {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.entry-list article {
+  background: #f4f7fc;
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.entry-list article div {
+  display: grid;
+  gap: 4px;
+}
+
+.entry-list b {
+  font-size: 11px;
+  text-transform: uppercase;
+  width: max-content;
+  padding: 4px 7px;
+  border-radius: 5px;
+  color: #18233d;
+}
+
+.entry-list b.plan {
+  background: #ffe1bd;
+}
+
+.entry-list b.work_done {
+  background: #cdeedf;
+}
+
+.entry-list span,
+.entry-list p {
+  color: #66738c;
+  font-size: 13px;
+  margin: 0;
+}
+
+.delete {
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.type-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.type-tabs button {
+  padding: 8px 10px;
+  border-radius: 7px;
+  color: #53617a;
+}
+
+.type-tabs .selected {
+  background: #e0e9fb;
+  color: #315ec6;
+  font-weight: bold;
+}
+
+.empty,
+.empty-state {
+  color: #77849a;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+}
+
+/* ==========================================================================
+   Responsive Rules
+   ========================================================================== */
+
+@media (max-width: 800px) {
+  .auth-card {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-brand {
+    padding: 30px;
+  }
+
+  .sidebar {
+    width: 78px;
+    padding: 18px 10px;
+  }
+
+  .brand-mark div,
+  .profile strong,
+  .profile small,
+  .team,
+  .sidebar-bottom span {
+    display: none;
+  }
+
+  .dashboard {
+    padding: 24px 14px;
+  }
+
+  .day {
+    min-height: 74px;
+  }
+
+  .weekdays div {
+    font-size: 9px;
+    padding: 10px 2px;
+  }
+
+  .calendar-panel {
+    padding: 12px;
+  }
+
+  .entry-dots {
+    margin-top: 8px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .header-right {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+}
+
+/* ==========================================================================
+   Dashboard Header with Filter Bar
+   ========================================================================== */
+
+.dashboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.header-left {
+  flex: 1;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 10px;
+  flex-shrink: 0;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-bar select {
+  border: 1.5px solid #d0daf0;
+  border-radius: 10px;
+  padding: 9px 14px;
+  background: #fff;
+  color: #17233b;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23315ec6' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.filter-bar select:hover,
+.filter-bar select:focus {
+  border-color: #315ec6;
+  box-shadow: 0 0 0 3px #315ec620;
+  outline: none;
+}
+
+/* ==========================================================================
+   Recycle Bin Button
+   ========================================================================== */
+
+.bin-btn {
+  border: 1.5px solid #d0daf0;
+  border-radius: 10px;
+  padding: 9px 13px;
+  background: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.bin-btn:hover {
+  background: #fff3f3;
+  border-color: #e07070;
+}
+
+/* ==========================================================================
+   Today Highlight
+   ========================================================================== */
+
+.day.today {
+  background: #eef3ff !important;
+  border: 2px solid #315ec6 !important;
+  position: relative;
+}
+
+.day.today time {
+  color: #315ec6;
+  font-weight: 900;
+  font-size: 15px;
+}
+
+.day.today::after {
+  content: "Today";
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 9px;
+  font-weight: 700;
+  color: #315ec6;
+  background: #d9e5ff;
+  border-radius: 4px;
+  padding: 1px 5px;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   Entry Actions (Edit + Delete buttons)
+   ========================================================================== */
+
+.entry-list article .entry-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  width: 100% !important;
+  border: 1px solid #d6deed !important;
+  border-radius: 6px !important;
+  padding: 12px !important;
+  background: #fdfdfe !important;
+  margin-top: 12px !important;
+  box-sizing: border-box !important;
+}
+
+.entry-list article .entry-actions .edit-btn,
+.entry-list article .entry-actions .delete {
+  border: none !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  padding: 7px 12px !important;
+  flex: 1 !important;
+  text-align: center !important;
+  transition: background 0.15s !important;
+  display: block !important;
+}
+
+.entry-list article .entry-actions .edit-btn {
+  background: #315ec6 !important;
+}
+
+.entry-list article .entry-actions .edit-btn:hover {
+  background: #234ca7 !important;
+}
+
+.entry-list article .entry-actions .delete {
+  background: #cf364b !important;
+}
+
+.entry-list article .entry-actions .delete:hover {
+  background: #b02638 !important;
+}
+
+.entry-list article.editing {
+  background: #eff4ff;
+  border: 1.5px solid #315ec6;
+}
+
+/* ==========================================================================
+   Form Header Row (Editing label + Cancel)
+   ========================================================================== */
+
+.form-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.form-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: #4776d3;
+}
+
+.cancel-edit {
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: #ce3c52;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cancel-edit:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Task-name Gate — Locked Fields
+   ========================================================================== */
+
+.field-locked {
+  opacity: 0.45;
+  cursor: not-allowed !important;
+  background: #f5f5f5 !important;
+}
+
+/* ==========================================================================
+   Recycle Bin Modal & List
+   ========================================================================== */
+
+.bin-modal {
+  width: min(680px, 100%);
+}
+
+.bin-subtitle {
+  color: #77849a;
+  font-size: 13px;
+  margin: -14px 0 18px;
+}
+
+.bin-list {
+  display: grid;
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.bin-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f6f8fd;
+  border: 1px solid #e2e8f5;
+  border-radius: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, border-color 0.15s;
+  width: 100%;
+}
+
+.bin-entry:hover {
+  background: #eef3ff;
+  border-color: #315ec6;
+}
+
+.bin-entry.expiring {
+  border-color: #f0a040;
+  background: #fff8ee;
+}
+
+.bin-entry-left {
+  display: grid;
+  gap: 3px;
+}
+
+.bin-entry-left strong {
+  font-size: 14px;
+  color: #17233b;
+}
+
+.bin-entry-left small {
+  font-size: 12px;
+  color: #77849a;
+}
+
+.bin-type {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 4px;
+  width: max-content;
+}
+
+.bin-type.plan {
+  background: #ffe1bd;
+  color: #7a4500;
+}
+
+.bin-type.work_done {
+  background: #cdeedf;
+  color: #1a5c3a;
+}
+
+.bin-entry-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.bin-days {
+  font-size: 11px;
+  font-weight: 700;
+  color: #4776d3;
+  background: #e0e9fb;
+  padding: 2px 7px;
+  border-radius: 5px;
+}
+
+.bin-days-warn {
+  color: #9a4e00;
+  background: #ffe8c2;
+}
+
+.bin-ago {
+  font-size: 11px;
+  color: #99a8c0;
+}
+
+/* Bin Preview Panel */
+.bin-preview {
+  border-top: 1px solid #e4eaf5;
+  padding-top: 20px;
+  margin-top: 8px;
+  position: relative;
+}
+
+.bin-preview b.work_done {
+  background: none !important;
+  color: #1a5c3a !important;
+  padding: 0 !important;
+  font-size: 13px !important;
+  text-transform: none !important;
+}
+
+.bin-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.close-preview {
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-size: 22px;
+  color: #77849a;
+}
+
+.bin-preview h3 {
+  margin: 6px 0 10px;
+}
+
+.bin-meta {
+  font-size: 13px;
+  color: #66738c;
+  margin: 4px 0;
+}
+
+.bin-desc {
+  background: #f5f7fc;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #354060;
+  margin: 8px 0;
+}
+
+.bin-preview-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.restore-btn {
+  flex: 1;
+}
+
+.perm-delete-btn {
+  border: 1.5px solid #e07070;
+  border-radius: 9px;
+  background: none;
+  color: #ce3c52;
+  padding: 13px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.perm-delete-btn:hover {
+  background: #fff0f0;
+}
+
+.perm-delete-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  pocket-dairy-back:
+    image: pocket-dairy-back
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "9091:9091"
+    environment:
+      - DATABASE_URL=postgresql://postgres:DragonBallZ%40PGSQL@host.docker.internal:5432/Pocket_Dairy
+      - JWT_SECRET_KEY=replace-with-a-long-random-production-secret
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  pocket-dairy-front:
+    image: pocket-dairy-front
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "9090:9090"
+    depends_on:
+      - pocket-dairy-back
