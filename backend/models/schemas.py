@@ -2,7 +2,7 @@ import enum
 import uuid
 from datetime import date, datetime
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 from sqlalchemy import Boolean, Date, DateTime, Enum, ForeignKey, String, Text, UniqueConstraint, func
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -56,6 +56,25 @@ class RegisterRequest(BaseModel):
     full_name: str = Field(min_length=2, max_length=255)
     employee_id: str = Field(min_length=1, max_length=100)
     role: UserRole = UserRole.employee
+
+    @field_validator("password")
+    @classmethod
+    def password_strength(cls, v: str) -> str:
+        import re
+        errors = []
+        if len(v) < 8:
+            errors.append("at least 8 characters")
+        if not re.search(r"[A-Z]", v):
+            errors.append("one uppercase letter")
+        if not re.search(r"[a-z]", v):
+            errors.append("one lowercase letter")
+        if not re.search(r"[0-9]", v):
+            errors.append("one number")
+        if not re.search(r"[^A-Za-z0-9]", v):
+            errors.append("one special character")
+        if errors:
+            raise ValueError("Password must contain: " + ", ".join(errors))
+        return v
 
 
 class LoginRequest(BaseModel):
