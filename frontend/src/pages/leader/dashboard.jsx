@@ -57,22 +57,29 @@ export default function LeaderDashboard() {
         employees={employees}
         selectedEmployee={selected}
         onEmployee={setSelected}
-        onLogout={() => {
-          clearSession();
-          router.push("/");
-        }}
         onRefresh={loadEntries}
       />
 
       <div className="dashboard">
-        <header>
-          <span className="eyebrow">LEADER DASHBOARD</span>
-          <h1>Team daily updates</h1>
-          <p>
-            {selected
-              ? `Reviewing ${selected.full_name}'s calendar`
-              : "Choose an employee to begin"}
-          </p>
+        <header className="dashboard-header">
+          <div className="header-left">
+            <span className="eyebrow">LEADER DASHBOARD</span>
+            <h1>Team daily updates</h1>
+            <p>
+              {selected
+                ? `Reviewing ${selected.full_name}'s calendar`
+                : "Choose an employee to begin"}
+            </p>
+          </div>
+          <div className="header-right">
+            <button
+              className="logout-btn"
+              onClick={() => { clearSession(); router.push("/"); }}
+              title="Log out"
+            >
+              ⏻ Log out
+            </button>
+          </div>
         </header>
 
         {selected ? (

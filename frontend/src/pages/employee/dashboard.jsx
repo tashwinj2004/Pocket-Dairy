@@ -90,10 +90,6 @@ export default function EmployeeDashboard() {
     <main className="app-shell">
       <Sidebar
         user={user}
-        onLogout={() => {
-          clearSession();
-          router.push("/");
-        }}
       />
 
       <div className="dashboard">
@@ -126,6 +122,15 @@ export default function EmployeeDashboard() {
                 ))}
               </select>
             </div>
+
+            {/* Logout button */}
+            <button
+              className="logout-btn"
+              onClick={() => { clearSession(); router.push("/"); }}
+              title="Log out"
+            >
+              ⏻ Log out
+            </button>
 
             {/* Recycle Bin button */}
             <button className="bin-btn" onClick={() => setBinOpen(true)} title="Recycle Bin">

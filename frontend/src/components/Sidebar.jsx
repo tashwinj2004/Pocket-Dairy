@@ -4,7 +4,6 @@ export default function Sidebar({
   employees = [],
   selectedEmployee,
   onEmployee,
-  onLogout,
   onRefresh,
 }) {
   return (
@@ -50,17 +49,14 @@ export default function Sidebar({
         </div>
       )}
 
-      {/* Bottom: logout above recycle-bin area */}
-      <div className="sidebar-bottom">
-        <button className="logout" onClick={onLogout}>
-          Log out
-        </button>
-        {isLeader && onRefresh && (
+      {/* Bottom: refresh button for leaders */}
+      {isLeader && onRefresh && (
+        <div className="sidebar-bottom">
           <button className="sidebar-refresh" onClick={onRefresh} title="Refresh employee data">
             ↻ Refresh
           </button>
-        )}
-      </div>
+        </div>
+      )}
     </aside>
   );
 }
