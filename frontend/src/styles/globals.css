@@ -154,7 +154,8 @@ textarea {
 
 .password-wrapper input {
   width: 100%;
-  padding-right: 44px; /* room for the toggle */
+  padding-right: 44px;
+  /* room for the toggle */
 }
 
 .pw-toggle {
@@ -582,9 +583,13 @@ header p {
 }
 
 .entry-description-text {
-  color: #66738c;
+  color: #354060;
   font-size: 13px;
-  margin: 0;
+  margin: 8px 0 0 0;
+  padding: 8px 12px;
+  background: #e8ecf5;
+  /* A shade matching the background card */
+  border-radius: 6px;
 }
 
 .entry-description-text.collapsed-lines {

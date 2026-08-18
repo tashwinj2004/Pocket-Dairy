@@ -190,10 +190,12 @@ export default function LeaderModal({ day, employee, entries, onClose }) {
                         <div>
                           <b className={entry.entry_type}>Daily plan</b>
                           <strong>{entry.task_name}</strong>
-                          <span>
-                            {entry.client_name}
-                            {entry.location && ` · ${entry.location}`}
-                          </span>
+                          {entry.client_name && (
+                            <span>Client: {entry.client_name}</span>
+                          )}
+                          {entry.location && (
+                            <span>Location: {entry.location}</span>
+                          )}
                           {entry.description && (
                             <p className={`entry-description-text ${isExpanded ? "expanded" : "collapsed-lines"}`}>
                               {entry.description}
@@ -231,10 +233,13 @@ export default function LeaderModal({ day, employee, entries, onClose }) {
                         <div>
                           <b className={entry.entry_type}>Work done</b>
                           <strong>{entry.task_name}</strong>
-                          <span>
-                            {entry.client_name}
-                            {entry.location && ` · ${entry.location}`}
-                          </span>
+                          {entry.client_name && (
+                            <span>Client: {entry.client_name}</span>
+                          )}
+                          {entry.location && (
+                            <span>Location: {entry.location}</span>
+                          )}
+
                           {entry.description && (
                             <p className={`entry-description-text ${isExpanded ? "expanded" : "collapsed-lines"}`}>
                               {entry.description}

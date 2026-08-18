@@ -85,10 +85,13 @@ export default function EmployeeModal({ day, entries, onClose, onCreate, onEdit,
                     {entry.entry_type === "plan" ? "Daily plan" : "Work done"}
                   </b>
                   <strong>{entry.task_name}</strong>
-                  <span>
-                    {entry.client_name}
-                    {entry.location && ` · ${entry.location}`}
-                  </span>
+                  {entry.client_name && (
+                    <span>Client: {entry.client_name}</span>
+                  )}
+                  {entry.location && (
+                    <span>Location: {entry.location}</span>
+                  )}
+
                   {entry.description && (
                     <p className={`entry-description-text ${isExpanded ? "expanded" : "collapsed-lines"}`}>
                       {entry.description}
